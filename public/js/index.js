@@ -17,12 +17,16 @@ Object.defineProperty(exports, "__esModule", ({
 var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 function App() {
-  return (0, jsx_runtime_1.jsx)("div", Object.assign({
+  return (0, jsx_runtime_1.jsxs)("div", Object.assign({
     className: "app"
   }, {
-    children: (0, jsx_runtime_1.jsx)("h1", {
-      children: "501 | Not Implemented"
-    })
+    children: [(0, jsx_runtime_1.jsx)("h1", {
+      children: "Hi, my name is Brix!"
+    }), (0, jsx_runtime_1.jsx)("p", {
+      children: "I am currently building an E-Learning System App."
+    }), (0, jsx_runtime_1.jsx)("p", {
+      children: "Please standby. It is still in progress..."
+    })]
   }));
 }
 
