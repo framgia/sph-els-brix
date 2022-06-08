@@ -13,3 +13,5 @@ Finally, run <code>npm run dev</code> to compile js and css files to the public 
 ## Development Server
 
 Run <code>php artisan serve</code> to run development server.
+
+Alternatively, run <code>npm run watch</code> for hot reload during development together with the server.
