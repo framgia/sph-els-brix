@@ -58,7 +58,11 @@ function Signup() {
         setTimeout(() => {
             setIsLoading(false);
 
-            const errors = validateSignupOnSubmit(formInputs, formErrors);
+            const errors = validateSignupOnSubmit(
+                formInputs,
+                formErrors,
+                formInputs.password
+            );
             setFormErrors((previousErrors) => ({
                 ...previousErrors,
                 ...errors,
@@ -83,7 +87,8 @@ function Signup() {
         const errors = validateSignup(
             e.target.name,
             e.target.value,
-            formErrors
+            formErrors,
+            formInputs.password
         );
         setFormErrors((previousErrors) => ({
             ...previousErrors,

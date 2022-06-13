@@ -11,7 +11,7 @@ export function validateSignup(
     name: string,
     value: string,
     formErrors: ELearning.SignupFormErrors,
-    confPass: string = ""
+    passwordToMatch: string
 ) {
     switch (name) {
         case "firstName":
@@ -132,7 +132,7 @@ export function validateSignup(
             }
             break;
         case "confirmPassword":
-            if (!doesMatch(confPass, value)) {
+            if (!doesMatch(passwordToMatch, value)) {
                 formErrors = {
                     ...formErrors,
                     confirmPassword: {
@@ -180,12 +180,13 @@ export function validateSignup(
 
 export function validateSignupOnSubmit(
     inputs: ELearning.LoginInputs,
-    formErrors: ELearning.SignupFormErrors
+    formErrors: ELearning.SignupFormErrors,
+    passwordToMatch: string
 ) {
     for (const [key, value] of Object.entries(inputs)) {
         formErrors = {
             ...formErrors,
-            ...validateSignup(key, value, formErrors),
+            ...validateSignup(key, value, formErrors, passwordToMatch),
         };
     }
 
