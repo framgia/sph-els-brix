@@ -1,7 +1,7 @@
 import View from "./View";
 
 function App() {
-    return <View />;
+  return <View />;
 }
 
 export default App;

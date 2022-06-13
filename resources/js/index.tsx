@@ -7,9 +7,9 @@ import theme from "./themes";
 import "@fontsource/nunito";
 
 createRoot(document.getElementById("root") as HTMLDivElement).render(
-    <StrictMode>
-        <ChakraProvider theme={theme}>
-            <App />
-        </ChakraProvider>
-    </StrictMode>
+  <StrictMode>
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  </StrictMode>
 );
