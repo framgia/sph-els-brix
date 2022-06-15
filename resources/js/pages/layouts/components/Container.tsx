@@ -6,7 +6,7 @@ export default function Container({ children }: React.PropsWithChildren<{}>) {
       width="full"
       alignItems="center"
       justifyContent="center"
-      padding="10px 70px"
+      padding="20px 70px"
     >
       {children}
     </Flex>

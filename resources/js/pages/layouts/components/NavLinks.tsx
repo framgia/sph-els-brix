@@ -6,7 +6,12 @@ export default function NavLinks() {
   const currentLocation = useLocation();
 
   return (
-    <Flex gap="20px">
+    <Flex
+      gap="20px"
+      width="container.md"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Tooltip label="Dashboard">
         <Link to="/dashboard">
           <Button

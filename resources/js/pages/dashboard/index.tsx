@@ -1,5 +1,5 @@
 import Container from "../layouts/components/Container";
-import Activities from "./Activities";
+import Activities from "./ActivityList";
 
 export default function Dashboard() {
   return (

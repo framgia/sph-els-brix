@@ -14,9 +14,9 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import {
+  BiCog,
   BiLogOut,
   BiMoon,
-  BiRefresh,
   BiRightArrowAlt,
   BiSun,
 } from "react-icons/bi";
@@ -25,7 +25,7 @@ export default function Settings() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Flex>
+    <Flex width="container.md" alignItems="center" justifyContent="flex-end">
       <Button onClick={toggleColorMode} variant="ghost">
         {colorMode === "light" ? (
           <BiMoon fontSize="26px" />
@@ -46,7 +46,7 @@ export default function Settings() {
         <Portal>
           <PopoverContent>
             <PopoverArrow />
-            <PopoverHeader height="max-content">
+            <PopoverHeader height="max-content" padding="5px">
               <Button
                 variant="ghost"
                 height="max-content"
@@ -71,7 +71,7 @@ export default function Settings() {
                 </Flex>
               </Button>
             </PopoverHeader>
-            <PopoverBody>
+            <PopoverBody padding="5px">
               <Button
                 variant="ghost"
                 height="max-content"
@@ -79,7 +79,7 @@ export default function Settings() {
                 padding="5px"
                 alignItems="center"
                 justifyContent="flex-start"
-                leftIcon={<BiRefresh fontSize="26px" />}
+                leftIcon={<BiCog fontSize="26px" />}
               >
                 <Flex
                   alignItems="center"
@@ -91,7 +91,7 @@ export default function Settings() {
                 </Flex>
               </Button>
             </PopoverBody>
-            <PopoverFooter>
+            <PopoverFooter padding="5px">
               <Button
                 variant="ghost"
                 height="max-content"
