@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
 
-import App from "./components/App";
+import App from "./App";
 import theme from "./themes";
 import "@fontsource/nunito";
 
