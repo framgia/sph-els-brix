@@ -1,8 +1,8 @@
 import { Button, Flex, Tooltip } from "@chakra-ui/react";
-import { BiBookOpen, BiGroup, BiHomeSmile } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
+import { BiBookOpen, BiGroup, BiHomeSmile } from "react-icons/bi";
 
-export default function NavLinks() {
+const NavLinks = () => {
   const currentLocation = useLocation();
 
   return (
@@ -47,4 +47,6 @@ export default function NavLinks() {
       </Tooltip>
     </Flex>
   );
-}
+};
+
+export default NavLinks;

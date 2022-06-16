@@ -1,7 +1,5 @@
 import View from "./pages/layouts/View";
 
-function App() {
-  return <View />;
-}
+const App = () => <View />;
 
 export default App;

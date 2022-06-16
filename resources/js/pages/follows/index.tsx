@@ -1,10 +1,11 @@
 import { Heading } from "@chakra-ui/react";
+
 import Container from "../layouts/components/Container";
 
-export default function Follows() {
-  return (
-    <Container>
-      <Heading>Follows</Heading>
-    </Container>
-  );
-}
+const Follows = () => (
+  <Container>
+    <Heading>Follows</Heading>
+  </Container>
+);
+
+export default Follows;
