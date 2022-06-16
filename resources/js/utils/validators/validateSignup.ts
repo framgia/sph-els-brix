@@ -7,12 +7,12 @@ import {
   doesMatch,
 } from "../helpers";
 
-export function validateSignup(
+export const validateSignup = (
   name: string,
   value: string,
   formErrors: ELearning.SignupFormErrors,
   passwordToMatch: string
-) {
+) => {
   switch (name) {
     case "firstName":
       if (isRequired(value)) {
@@ -175,13 +175,13 @@ export function validateSignup(
   }
 
   return formErrors;
-}
+};
 
-export function validateSignupOnSubmit(
+export const validateSignupOnSubmit = (
   inputs: ELearning.LoginInputs,
   formErrors: ELearning.SignupFormErrors,
   passwordToMatch: string
-) {
+) => {
   for (const [key, value] of Object.entries(inputs)) {
     formErrors = {
       ...formErrors,
@@ -190,4 +190,4 @@ export function validateSignupOnSubmit(
   }
 
   return formErrors;
-}
+};

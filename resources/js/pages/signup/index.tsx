@@ -16,7 +16,7 @@ import {
   validateSignupOnSubmit,
 } from "../../utils/validators/validateSignup";
 
-function Signup() {
+const Signup = () => {
   const [formInputs, setFormInputs] = useState({
     firstName: "",
     lastName: "",
@@ -239,6 +239,6 @@ function Signup() {
       </Flex>
     </Flex>
   );
-}
+};
 
 export default Signup;

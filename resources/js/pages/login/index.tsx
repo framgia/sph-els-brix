@@ -16,7 +16,7 @@ import {
   validateLoginOnSubmit,
 } from "../../utils/validators/validateLogin";
 
-function Login() {
+const Login = () => {
   const [formInputs, setFormInputs] = useState<ELearning.LoginInputs>({
     email: "",
     password: "",
@@ -153,6 +153,6 @@ function Login() {
       </Flex>
     </Flex>
   );
-}
+};
 
 export default Login;

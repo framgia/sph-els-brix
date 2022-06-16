@@ -1,10 +1,10 @@
 import { isRequired } from "../helpers";
 
-export function validateLogin(
+export const validateLogin = (
   name: string,
   value: string,
   formErrors: ELearning.LoginFormErrors
-) {
+) => {
   switch (name) {
     case "email":
       if (isRequired(value)) {
@@ -58,12 +58,12 @@ export function validateLogin(
   }
 
   return formErrors;
-}
+};
 
-export function validateLoginOnSubmit(
+export const validateLoginOnSubmit = (
   inputs: ELearning.LoginInputs,
   formErrors: ELearning.LoginFormErrors
-) {
+) => {
   for (const [key, value] of Object.entries(inputs)) {
     formErrors = {
       ...formErrors,
@@ -72,4 +72,4 @@ export function validateLoginOnSubmit(
   }
 
   return formErrors;
-}
+};

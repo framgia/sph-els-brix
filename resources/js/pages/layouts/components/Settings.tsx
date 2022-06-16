@@ -21,7 +21,7 @@ import {
   BiSun,
 } from "react-icons/bi";
 
-export default function Settings() {
+const Settings = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -115,4 +115,6 @@ export default function Settings() {
       </Popover>
     </Flex>
   );
-}
+};
+
+export default Settings;
