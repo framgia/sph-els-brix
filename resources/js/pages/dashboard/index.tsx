@@ -1,9 +1,11 @@
-import Container from "../layouts/components/Container";
-import Activities from "./ActivityList";
+import { Container, Flex } from "@chakra-ui/react";
+import Activities from "./components/ActivityList";
 
 const Dashboard = () => (
-  <Container>
-    <Activities />
+  <Container maxW="container.xl" py={5}>
+    <Flex justifyContent="center">
+      <Activities />
+    </Flex>
   </Container>
 );
 

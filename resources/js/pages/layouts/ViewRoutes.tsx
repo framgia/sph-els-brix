@@ -4,6 +4,7 @@ import Dashboard from "../dashboard";
 import Follows from "../follows";
 import Lessons from "../lessons";
 import Login from "../login";
+import Profile from "../profile";
 import Signup from "../signup";
 import Layout from "./Layout";
 
@@ -15,6 +16,7 @@ const ViewRoutes = () => (
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/follows" element={<Follows />} />
       <Route path="/lessons" element={<Lessons />} />
+      <Route path="/profile" element={<Profile />} />
     </Route>
   </Routes>
 );

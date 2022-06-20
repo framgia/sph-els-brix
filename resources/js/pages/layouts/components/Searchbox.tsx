@@ -1,20 +1,19 @@
 import {
+  AspectRatio,
   Flex,
+  Image,
   Input,
   InputGroup,
   InputLeftElement,
-  Text,
 } from "@chakra-ui/react";
-import { BiBookReader } from "react-icons/bi";
 import { SearchIcon } from "@chakra-ui/icons";
 
 const Searchbox = () => (
   <Flex alignItems="center" gap="20px" width="container.md">
-    <Flex alignItems="center">
-      <BiBookReader fontSize="26px" />
-      <Text fontSize="md">E-Learning</Text>
-    </Flex>
-    <InputGroup width="sm">
+    <AspectRatio ratio={1} w={7}>
+      <Image src="assets/e-learning-logo.png" />
+    </AspectRatio>
+    <InputGroup w="auto">
       <InputLeftElement
         pointerEvents="none"
         children={<SearchIcon color="gray.300" />}
