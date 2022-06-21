@@ -1,9 +1,11 @@
-import { Heading } from "@chakra-ui/react";
-import Container from "../layouts/components/Container";
+import { Container, Flex } from "@chakra-ui/react";
+import CategoryTabs from "./components/CategoryTabs";
 
 const Lessons = () => (
-  <Container>
-    <Heading>Lessons</Heading>
+  <Container maxW="container.xl" py={5}>
+    <Flex justifyContent="center">
+      <CategoryTabs />
+    </Flex>
   </Container>
 );
 
