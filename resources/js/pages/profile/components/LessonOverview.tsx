@@ -1,9 +1,9 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import useStore from "../../../store";
+
+import { loggedUser } from "../../../utils/dummies/data";
 
 const LessonOverview = () => {
-  const { loggedUserId } = useStore();
   const { id } = useParams();
   return (
     <Box w="550px" rounded="md" p={5} boxShadow="md" borderWidth="1px">
@@ -14,7 +14,7 @@ const LessonOverview = () => {
             Lesson 1
           </Heading>
         </Flex>
-        {Number(id) === loggedUserId && (
+        {Number(id) === loggedUser.id && (
           <Button w="max-content">Proceed to Lessons</Button>
         )}
       </Box>

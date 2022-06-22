@@ -25,12 +25,12 @@ import {
   BiSun,
 } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import useStore from "../../../store";
+
+import { loggedUser } from "../../../utils/dummies/data";
 
 const Settings = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { imgUrl } = useStore((state) => state.loggedUser);
 
   return (
     <Flex
@@ -60,7 +60,7 @@ const Settings = () => {
           >
             <Tooltip label="Profile">
               <AspectRatio ratio={1} w={7}>
-                <Image src={imgUrl} borderRadius="full" />
+                <Image src={loggedUser.imgUrl} borderRadius="full" />
               </AspectRatio>
             </Tooltip>
           </IconButton>
@@ -69,7 +69,7 @@ const Settings = () => {
           <PopoverContent>
             <PopoverArrow />
             <PopoverHeader height="max-content" padding="5px">
-              <Link to="/profile">
+              <Link to="/profile/1">
                 <Button
                   variant="ghost"
                   height="max-content"
@@ -81,7 +81,7 @@ const Settings = () => {
                 >
                   <Flex gap="15px" alignItems="center">
                     <Image
-                      src={imgUrl}
+                      src={loggedUser.imgUrl}
                       width="60px"
                       height="60px"
                       borderRadius="50%"

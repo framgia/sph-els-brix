@@ -13,17 +13,21 @@ import {
 import { useEffect, useState } from "react";
 import { BiDotsHorizontalRounded, BiXCircle } from "react-icons/bi";
 import { useParams } from "react-router-dom";
-import useStore from "../../../store";
+
+import { loggedUser, visitedUser } from "../../../utils/dummies/data";
 
 const Activity = () => {
-  const { loggedUser, visitedUser, loggedUserId } = useStore();
   const { id } = useParams();
 
   const [user, setUser] = useState<ELearning.UserInfo>();
 
   useEffect(() => {
-    Number(id) === loggedUserId ? setUser(loggedUser) : setUser(visitedUser);
-  }, []);
+    if (id) {
+      Number(id) === loggedUser.id ? setUser(loggedUser) : setUser(visitedUser);
+    } else {
+      setUser(loggedUser);
+    }
+  }, [id]);
   return (
     <Box
       width="full"
