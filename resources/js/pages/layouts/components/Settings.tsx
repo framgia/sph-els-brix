@@ -69,7 +69,7 @@ const Settings = () => {
           <PopoverContent>
             <PopoverArrow />
             <PopoverHeader height="max-content" padding="5px">
-              <Link to="/profile/1">
+              <Link to="/profile">
                 <Button
                   variant="ghost"
                   height="max-content"

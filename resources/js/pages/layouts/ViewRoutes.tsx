@@ -18,8 +18,8 @@ const ViewRoutes = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/follows" element={<Follows />} />
         <Route path="/lessons" element={<Lessons />} />
-        <Route path="/profile" element={<ProfileRoute />}>
-          <Route path=":id" element={<Profile />} />
+        <Route path="/profile" element={<Profile />}>
+          <Route path=":id" />
         </Route>
       </Route>
     </Routes>

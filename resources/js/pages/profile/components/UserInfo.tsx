@@ -20,7 +20,11 @@ const UserInfo = () => {
   const [user, setUser] = useState<ELearning.UserInfo>();
 
   useEffect(() => {
-    Number(id) === loggedUser.id ? setUser(loggedUser) : setUser(visitedUser);
+    if (id) {
+      Number(id) === loggedUser.id ? setUser(loggedUser) : setUser(visitedUser);
+    } else {
+      setUser(loggedUser);
+    }
   }, [id]);
 
   return (

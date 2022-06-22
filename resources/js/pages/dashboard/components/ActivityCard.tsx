@@ -28,6 +28,7 @@ const Activity = () => {
       setUser(loggedUser);
     }
   }, [id]);
+
   return (
     <Box
       width="full"
