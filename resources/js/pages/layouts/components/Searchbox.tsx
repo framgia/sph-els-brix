@@ -7,11 +7,10 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import useStore from "../../../store";
+
+import logo from "./logo.png";
 
 const Searchbox = () => {
-  const { logo } = useStore();
-
   return (
     <Flex alignItems="center" gap="20px" width="container.md">
       <AspectRatio ratio={1} w={7}>
