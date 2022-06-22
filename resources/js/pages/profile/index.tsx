@@ -1,6 +1,7 @@
 import { Container, Flex } from "@chakra-ui/react";
-import CurrentLessonOverview from "./components/CurrentLessonOverview";
-import CurrentUserActivityList from "./components/CurrentUserActivityList";
+
+import LessonOverview from "./components/LessonOverview";
+import UserActivityList from "./components/UserActivityList";
 import UserInfo from "./components/UserInfo";
 
 const Profile = () => {
@@ -10,8 +11,8 @@ const Profile = () => {
         <UserInfo />
       </Flex>
       <Flex alignItems="flex-start" justifyContent="space-between" gap={5}>
-        <CurrentLessonOverview />
-        <CurrentUserActivityList />
+        <LessonOverview />
+        <UserActivityList />
       </Flex>
     </Container>
   );

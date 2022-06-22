@@ -25,10 +25,12 @@ import {
   BiSun,
 } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import useStore from "../../../store";
 
 const Settings = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const { imgUrl } = useStore((state) => state.loggedUser);
 
   return (
     <Flex
@@ -58,7 +60,7 @@ const Settings = () => {
           >
             <Tooltip label="Profile">
               <AspectRatio ratio={1} w={7}>
-                <Image src="assets/aoi-ashito.jpg" borderRadius="full" />
+                <Image src={imgUrl} borderRadius="full" />
               </AspectRatio>
             </Tooltip>
           </IconButton>
@@ -79,7 +81,7 @@ const Settings = () => {
                 >
                   <Flex gap="15px" alignItems="center">
                     <Image
-                      src="assets/aoi-ashito.jpg"
+                      src={imgUrl}
                       width="60px"
                       height="60px"
                       borderRadius="50%"
