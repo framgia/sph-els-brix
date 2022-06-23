@@ -18,20 +18,24 @@ import {
 } from "../../../utils/dummies/data";
 
 const CategoryTabs = () => {
+  const calculatePercentage = (lessons: typeof easyLessons) =>
+    (lessons.filter((lesson) => lesson.isFinished).length / lessons.length) *
+    100;
+
   return (
     <Tabs isFitted variant="enclosed">
       <TabList mb="1em">
         <Tab display="flex" gap={1.5}>
           <Text>Easy</Text>
-          <Tag>0 %</Tag>
+          <Tag>{calculatePercentage(easyLessons)}%</Tag>
         </Tab>
         <Tab display="flex" gap={1.5}>
           <Text>Medium</Text>
-          <Tag>0 %</Tag>
+          <Tag>{calculatePercentage(mediumLessons)}%</Tag>
         </Tab>
         <Tab display="flex" gap={1.5}>
           <Text>Hard</Text>
-          <Tag>0 %</Tag>
+          <Tag>{calculatePercentage(hardLessons)}%</Tag>
         </Tab>
       </TabList>
       <TabPanels>

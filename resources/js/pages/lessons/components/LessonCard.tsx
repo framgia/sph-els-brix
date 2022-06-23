@@ -9,17 +9,20 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
+import WordsLearned from "./WordsLearned";
 
 type LessonCardProps = {
   title: string;
   description: string;
   isUnlocked: boolean;
+  isFinished: boolean;
 };
 
 const LessonCard: React.FC<LessonCardProps> = ({
   title,
   description,
   isUnlocked,
+  isFinished,
 }) => {
   return (
     <Accordion allowToggle allowMultiple>
@@ -34,7 +37,11 @@ const LessonCard: React.FC<LessonCardProps> = ({
         </AccordionButton>
         <AccordionPanel pb={4}>
           <Text mb={5}>{description}</Text>
-          <Button isDisabled={!isUnlocked}>Start {title}</Button>
+          {isFinished ? (
+            <WordsLearned />
+          ) : (
+            <Button isDisabled={!isUnlocked}>Start {title}</Button>
+          )}
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

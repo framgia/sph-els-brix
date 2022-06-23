@@ -15,6 +15,7 @@ export const visitedUser: ELearning.UserInfo = {
 export const easyLessons = [
   {
     id: 1,
+    isFinished: true,
     isUnlocked: true,
     title: "Lesson One",
     description:
@@ -22,13 +23,15 @@ export const easyLessons = [
   },
   {
     id: 2,
-    isUnlocked: false,
+    isFinished: false,
+    isUnlocked: true,
     title: "Lesson Two",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
   {
     id: 3,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Three",
     description:
@@ -36,6 +39,7 @@ export const easyLessons = [
   },
   {
     id: 4,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Four",
     description:
@@ -43,6 +47,7 @@ export const easyLessons = [
   },
   {
     id: 5,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Five",
     description:
@@ -53,6 +58,7 @@ export const easyLessons = [
 export const mediumLessons = [
   {
     id: 1,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Six",
     description:
@@ -60,6 +66,7 @@ export const mediumLessons = [
   },
   {
     id: 2,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Seven",
     description:
@@ -67,6 +74,7 @@ export const mediumLessons = [
   },
   {
     id: 3,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Eight",
     description:
@@ -74,6 +82,7 @@ export const mediumLessons = [
   },
   {
     id: 4,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Nine",
     description:
@@ -81,6 +90,7 @@ export const mediumLessons = [
   },
   {
     id: 5,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Ten",
     description:
@@ -91,6 +101,7 @@ export const mediumLessons = [
 export const hardLessons = [
   {
     id: 1,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Eleven",
     description:
@@ -98,6 +109,7 @@ export const hardLessons = [
   },
   {
     id: 2,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Twelve",
     description:
@@ -105,6 +117,7 @@ export const hardLessons = [
   },
   {
     id: 3,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Thirteen",
     description:
@@ -112,6 +125,7 @@ export const hardLessons = [
   },
   {
     id: 4,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Fourteen",
     description:
@@ -119,9 +133,18 @@ export const hardLessons = [
   },
   {
     id: 5,
+    isFinished: false,
     isUnlocked: false,
     title: "Lesson Fifteen",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
+];
+
+export const wordsLearned = [
+  "student",
+  "flow",
+  "discover",
+  "fossil",
+  "indication",
 ];
