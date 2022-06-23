@@ -1,25 +1,22 @@
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import ChangePassword from "./ChangePassword";
 
-import PersonalInfoForm from "./PersonalInfoForm";
+import AccountDetails from "./AccountDetails";
 
 const SettingsTabs = () => {
   return (
     <Tabs>
       <TabList justifyContent="center">
-        <Tab>Personal Information</Tab>
-        <Tab>Change Password</Tab>
-        <Tab>Account Options</Tab>
+        <Tab>Account Details</Tab>
+        <Tab>Password</Tab>
       </TabList>
 
       <TabPanels>
         <TabPanel display="flex" justifyContent="center">
-          <PersonalInfoForm />
+          <AccountDetails />
         </TabPanel>
-        <TabPanel>
-          <p>two!</p>
-        </TabPanel>
-        <TabPanel>
-          <p>three!</p>
+        <TabPanel display="flex" justifyContent="center">
+          <ChangePassword />
         </TabPanel>
       </TabPanels>
     </Tabs>

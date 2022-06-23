@@ -46,4 +46,6 @@ declare namespace ELearning {
     isUnlocked: boolean;
     isFinished: boolean;
   };
+
+  type PasswordNames = "currentPassword" | "newPassword" | "confirmNewPassword";
 }
