@@ -24,4 +24,17 @@ declare namespace ELearning {
     password: FormErrors;
     confirmPassword: FormErrors;
   };
+
+  type UserInfo = {
+    id: number;
+    fullName: string;
+    imgUrl: string;
+  };
+
+  interface Interface {
+    loggedUser: UserInfo;
+    visitedUser: UserInfo;
+    logo: string;
+    loggedUserId: number;
+  }
 }

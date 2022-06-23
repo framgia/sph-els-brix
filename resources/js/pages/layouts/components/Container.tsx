@@ -1,6 +1,7 @@
+import { FC, PropsWithChildren } from "react";
 import { Flex } from "@chakra-ui/react";
 
-const Container = ({ children }: React.PropsWithChildren<{}>) => (
+const Container: FC<PropsWithChildren> = ({ children }) => (
   <Flex
     width="full"
     alignItems="center"
