@@ -1,9 +1,17 @@
-import { Heading } from "@chakra-ui/react";
-import Container from "../layouts/components/Container";
+import { Container } from "@chakra-ui/react";
+
+import CategoryTabs from "./components/CategoryTabs";
 
 const Lessons = () => (
-  <Container>
-    <Heading>Lessons</Heading>
+  <Container
+    maxW="container.xl"
+    marginTop={10}
+    paddingTop={5}
+    boxShadow="md"
+    borderWidth="1px"
+    rounded="md"
+  >
+    <CategoryTabs />
   </Container>
 );
 
