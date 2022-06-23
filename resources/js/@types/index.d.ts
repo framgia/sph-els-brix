@@ -27,6 +27,8 @@ declare namespace ELearning {
 
   type UserInfo = {
     id: number;
+    firstName: string;
+    lastName: string;
     fullName: string;
     imgUrl: string;
   };

@@ -97,24 +97,27 @@ const Settings = () => {
               </Link>
             </PopoverHeader>
             <PopoverBody padding="5px">
-              <Button
-                variant="ghost"
-                height="max-content"
-                width="full"
-                padding="5px"
-                alignItems="center"
-                justifyContent="flex-start"
-                leftIcon={<BiCog fontSize="26px" />}
-              >
-                <Flex
-                  alignItems="center"
-                  justifyContent="space-between"
+              <Link to="/settings">
+                <Button
+                  variant="ghost"
+                  height="max-content"
                   width="full"
+                  padding="5px"
+                  alignItems="center"
+                  justifyContent="flex-start"
+                  leftIcon={<BiCog fontSize="26px" />}
+                  onClick={onClose}
                 >
-                  <Text fontWeight="normal">Settings</Text>
-                  <BiRightArrowAlt fontSize="26px" />
-                </Flex>
-              </Button>
+                  <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    width="full"
+                  >
+                    <Text fontWeight="normal">Settings</Text>
+                    <BiRightArrowAlt fontSize="26px" />
+                  </Flex>
+                </Button>
+              </Link>
             </PopoverBody>
             <PopoverFooter padding="5px">
               <Button
