@@ -11,14 +11,7 @@ import {
 } from "@chakra-ui/react";
 import WordsLearned from "./WordsLearned";
 
-type LessonCardProps = {
-  title: string;
-  description: string;
-  isUnlocked: boolean;
-  isFinished: boolean;
-};
-
-const LessonCard: React.FC<LessonCardProps> = ({
+const LessonCard: React.FC<ELearning.LessonCardProps> = ({
   title,
   description,
   isUnlocked,

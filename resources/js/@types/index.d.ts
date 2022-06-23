@@ -37,4 +37,11 @@ declare namespace ELearning {
     logo: string;
     loggedUserId: number;
   }
+
+  type LessonCardProps = {
+    title: string;
+    description: string;
+    isUnlocked: boolean;
+    isFinished: boolean;
+  };
 }
