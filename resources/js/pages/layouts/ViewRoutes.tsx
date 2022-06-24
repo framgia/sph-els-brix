@@ -5,7 +5,7 @@ import Follows from "../follows";
 import Lessons from "../lessons";
 import Login from "../login";
 import Profile from "../profile";
-import ProfileRoute from "../profile/ProfileRoute";
+import Settings from "../settings";
 import Signup from "../signup";
 import Layout from "./Layout";
 
@@ -21,6 +21,7 @@ const ViewRoutes = () => {
         <Route path="/profile" element={<Profile />}>
           <Route path=":id" />
         </Route>
+        <Route path="/settings" element={<Settings />} />
       </Route>
     </Routes>
   );

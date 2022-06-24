@@ -27,6 +27,8 @@ declare namespace ELearning {
 
   type UserInfo = {
     id: number;
+    firstName: string;
+    lastName: string;
     fullName: string;
     imgUrl: string;
   };
@@ -44,4 +46,6 @@ declare namespace ELearning {
     isUnlocked: boolean;
     isFinished: boolean;
   };
+
+  type PasswordNames = "currentPassword" | "newPassword" | "confirmNewPassword";
 }

@@ -14,4 +14,4 @@ export const isValidEmail = (email: string) =>
     email
   );
 
-export const isValidName = (name: string) => /^[a-zA-Z]+$/.test(name);
+export const isValidName = (name: string) => /^[a-zA-ZñÑ]+$/.test(name);
