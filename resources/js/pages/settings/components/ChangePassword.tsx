@@ -8,7 +8,10 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-import validatePassword from "../../../utils/validators/validatePassword";
+import {
+  validatePassword,
+  validatePasswordOnSubmit,
+} from "../../../utils/validators/validatePassword";
 
 const ChangePassword = () => {
   const [passwords, setPasswords] = useState({
@@ -56,6 +59,18 @@ const ChangePassword = () => {
     }));
   };
 
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const onValidatePasswords = validatePasswordOnSubmit(passwords);
+
+    if (onValidatePasswords) {
+      return setErrors((previousErrors) => ({
+        ...previousErrors,
+        ...onValidatePasswords,
+      }));
+    }
+  };
+
   return (
     <Box w="md">
       <form
@@ -63,6 +78,7 @@ const ChangePassword = () => {
           display: "flex",
           flexDirection: "column",
         }}
+        onSubmit={onSubmitHandler}
       >
         <FormControl mb={5} isInvalid={errors.currentPassword.hasError}>
           <FormLabel htmlFor="currentPassword">Current Password</FormLabel>
@@ -101,7 +117,7 @@ const ChangePassword = () => {
             {errors.confirmNewPassword.errorMessage}
           </FormErrorMessage>
         </FormControl>
-        <Button>Change password</Button>
+        <Button type="submit">Change password</Button>
       </form>
     </Box>
   );

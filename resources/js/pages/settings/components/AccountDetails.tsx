@@ -9,7 +9,10 @@ import {
 import { useState } from "react";
 
 import { loggedUser } from "../../../utils/dummies/data";
-import { validatePersonalInfo } from "../../../utils/validators/validatePersonalInfo";
+import {
+  validatePersonalInfo,
+  validatePersonalInfoOnSubmit,
+} from "../../../utils/validators/validatePersonalInfo";
 
 const AccountDetails = () => {
   const [info, setInfo] = useState({
@@ -42,6 +45,18 @@ const AccountDetails = () => {
     }));
   };
 
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const onValidateInfos = validatePersonalInfoOnSubmit(info);
+
+    if (onValidateInfos) {
+      return setErrors((previousErrors) => ({
+        ...previousErrors,
+        ...onValidateInfos,
+      }));
+    }
+  };
+
   return (
     <Box w="md">
       <form
@@ -49,6 +64,7 @@ const AccountDetails = () => {
           display: "flex",
           flexDirection: "column",
         }}
+        onSubmit={onSubmitHandler}
       >
         <FormControl mb={5} isInvalid={errors.firstName.hasError}>
           <FormLabel htmlFor="firstName">First Name</FormLabel>
@@ -74,7 +90,7 @@ const AccountDetails = () => {
           />
           <FormErrorMessage>{errors.lastName.errorMessage}</FormErrorMessage>
         </FormControl>
-        <Button>Update information</Button>
+        <Button type="submit">Update information</Button>
       </form>
     </Box>
   );

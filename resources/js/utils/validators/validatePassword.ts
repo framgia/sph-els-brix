@@ -1,57 +1,98 @@
 import { doesMatch, isAlphaNumeric, isMinimum, isRequired } from "../helpers";
 
+const customErrors = {
+  required: {
+    hasError: true,
+    errorMessage: "This field is required",
+  },
+  minimum: {
+    hasError: true,
+    errorMessage: "Must be eight characters or longer",
+  },
+  alphaNumeric: {
+    hasError: true,
+    errorMessage: "Only letters and numbers are allowed",
+  },
+  unmatched: {
+    hasError: true,
+    errorMessage: "Does not match with the new password",
+  },
+  defaultMsg: {
+    hasError: false,
+    errorMessage: "",
+  },
+};
+
 export const validatePassword = (
   name: ELearning.PasswordNames,
   password: string,
   confirmPassword?: string
 ) => {
-  const required = {
-    hasError: true,
-    errorMessage: "This field is required",
-  };
-
-  const minimum = {
-    hasError: true,
-    errorMessage: "Must be eight characters or longer",
-  };
-
-  const alphaNumeric = {
-    hasError: true,
-    errorMessage: "Only letters and numbers are allowed",
-  };
-
-  const unmatched = {
-    hasError: true,
-    errorMessage: "Does not match with the new password",
-  };
-
-  const defaultMsg = {
-    hasError: false,
-    errorMessage: "",
-  };
-
   switch (name) {
     case "currentPassword":
       return isRequired(password)
-        ? required
+        ? customErrors.required
         : !isMinimum(password)
-        ? minimum
-        : defaultMsg;
+        ? customErrors.minimum
+        : customErrors.defaultMsg;
     case "newPassword":
       return isRequired(password)
-        ? required
+        ? customErrors.required
         : !isMinimum(password)
-        ? minimum
+        ? customErrors.minimum
         : !isAlphaNumeric(password)
-        ? alphaNumeric
-        : defaultMsg;
+        ? customErrors.alphaNumeric
+        : customErrors.defaultMsg;
     case "confirmNewPassword":
       return isRequired(password)
-        ? required
+        ? customErrors.required
         : !doesMatch(password, confirmPassword!)
-        ? unmatched
-        : defaultMsg;
+        ? customErrors.unmatched
+        : customErrors.defaultMsg;
   }
 };
 
-export default validatePassword;
+type Passwords = {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+};
+
+export const validatePasswordOnSubmit = (passwords: Passwords) => {
+  let e = {
+    currentPassword: {
+      hasError: false,
+      errorMessage: "",
+    },
+    newPassword: {
+      hasError: false,
+      errorMessage: "",
+    },
+    confirmNewPassword: {
+      hasError: false,
+      errorMessage: "",
+    },
+  };
+
+  for (const [k, v] of Object.entries(passwords)) {
+    e = {
+      ...e,
+      [k]:
+        k === "confirmNewPassword"
+          ? validatePassword(
+              k as ELearning.PasswordNames,
+              v,
+              passwords.newPassword
+            )
+          : validatePassword(k as ELearning.PasswordNames, v),
+    };
+  }
+
+  return e.currentPassword.hasError
+    ? e
+    : e.newPassword.hasError
+    ? e
+    : e.confirmNewPassword.hasError
+    ? e
+    : false;
+};
