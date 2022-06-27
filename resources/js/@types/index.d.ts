@@ -2,9 +2,21 @@ export = ELearning;
 export as namespace ELearning;
 
 declare namespace ELearning {
+  /*
+    TODO: REFACTOR AND MERGE TYPES
+  */
+
   type LoginInputs = {
     email: string;
     password: string;
+  };
+
+  type SignupFormInputs = {
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
   };
 
   type FormErrors = {
@@ -18,11 +30,11 @@ declare namespace ELearning {
   };
 
   type SignupFormErrors = {
-    firstName: FormErrors;
-    lastName: FormErrors;
+    firstname: FormErrors;
+    lastname: FormErrors;
     email: FormErrors;
     password: FormErrors;
-    confirmPassword: FormErrors;
+    password_confirmation: FormErrors;
   };
 
   type UserInfo = {
@@ -48,4 +60,62 @@ declare namespace ELearning {
   };
 
   type PasswordNames = "currentPassword" | "newPassword" | "confirmNewPassword";
+
+  /*
+    ------------------------------------------------------
+    THESE TYPES ARE FINAL AND WILL BE PUSHED TO PRODUCTION
+    ------------------------------------------------------
+  */
+
+  interface UserSignupBody {
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+  }
+
+  // Signup Error from Frontend
+  type FrontendErrorKeys =
+    | "firstname"
+    | "lastname"
+    | "email"
+    | "password"
+    | "password_confirmation";
+
+  type FrontendErrorValues = {
+    hasError: boolean;
+    errorMessage: string;
+  };
+
+  type FrontendError = Record<FrontendErrorKeys, FrontendErrorValues>;
+
+  // Signup Error from Backend
+  type SystemErrorData = {
+    message: string;
+    errors: SystemErrorErrors;
+  };
+
+  type SystemErrorErrors = {
+    email?: string[];
+  };
+
+  interface SystemError {
+    status: number;
+    data: SystemErrorData;
+  }
+
+  type User = {
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+    avatar_url: string;
+    created_at: string;
+    updated_at: string;
+  };
+
+  interface SuccessfulSignupResponse {
+    signupSuccess: string;
+  }
 }

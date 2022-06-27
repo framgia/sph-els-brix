@@ -7,30 +7,32 @@ import {
   Heading,
   Input,
   Text,
+  Alert,
+  AlertIcon,
+  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
-import {
-  validateSignup,
-  validateSignupOnSubmit,
-} from "../../utils/validators/validateSignup";
+import { validateSignup } from "../../utils/validators/validateSignup";
+import { useSignupMutation } from "../../store/user/api/userApi";
 
 const Signup = () => {
-  const [formInputs, setFormInputs] = useState({
-    firstName: "",
-    lastName: "",
+  const [signup] = useSignupMutation();
+
+  const [formInputs, setFormInputs] = useState<ELearning.UserSignupBody>({
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    password_confirmation: "",
   });
 
-  const [formErrors, setFormErrors] = useState({
-    firstName: {
+  const [formErrors, setFormErrors] = useState<ELearning.FrontendError>({
+    firstname: {
       hasError: false,
       errorMessage: "",
     },
-    lastName: {
+    lastname: {
       hasError: false,
       errorMessage: "",
     },
@@ -42,38 +44,55 @@ const Signup = () => {
       hasError: false,
       errorMessage: "",
     },
-    confirmPassword: {
+    password_confirmation: {
       hasError: false,
       errorMessage: "",
     },
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsLoading(true);
+    setSuccessMessage(null);
 
-    setTimeout(() => {
-      setIsLoading(false);
+    signup(formInputs)
+      .unwrap()
+      .then((payload) => {
+        setFormInputs((previousFormInputs) => ({
+          ...previousFormInputs,
+          firstname: "",
+          lastname: "",
+          email: "",
+          password: "",
+          password_confirmation: "",
+        }));
 
-      const errors = validateSignupOnSubmit(
-        formInputs,
-        formErrors,
-        formInputs.password
-      );
-      setFormErrors((previousErrors) => ({
-        ...previousErrors,
-        ...errors,
-      }));
-    }, 2000);
+        setIsLoading(false);
+        setSuccessMessage(payload.signupSuccess);
+      })
+      .catch((error: ELearning.SystemError) => {
+        for (const [k, v] of Object.entries(error.data.errors)) {
+          setFormErrors((previousErrors) => ({
+            ...previousErrors,
+            [k]: {
+              hasError: true,
+              errorMessage: v[0],
+            },
+          }));
+        }
 
-    setFormInputs((previousFormInputs) => ({
-      ...previousFormInputs,
-      password: "",
-      confirmPassword: "",
-    }));
+        setFormInputs((previousFormInputs) => ({
+          ...previousFormInputs,
+          password: "",
+          confirmPassword: "",
+        }));
+
+        setIsLoading(false);
+      });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +109,7 @@ const Signup = () => {
       formErrors,
       formInputs.password
     );
+
     setFormErrors((previousErrors) => ({
       ...previousErrors,
       ...errors,
@@ -115,44 +135,44 @@ const Signup = () => {
           <form onSubmit={onSubmit}>
             <FormControl
               marginBottom="1.5"
-              isInvalid={formErrors.firstName.hasError}
+              isInvalid={formErrors.firstname.hasError}
             >
-              <FormLabel htmlFor="firstName" fontSize="sm">
+              <FormLabel htmlFor="firstname" fontSize="sm">
                 First Name
               </FormLabel>
               <Input
-                id="firstName"
-                name="firstName"
+                id="firstname"
+                name="firstname"
                 type="text"
                 placeholder="Enter your first name"
-                value={formInputs.firstName}
+                value={formInputs.firstname}
                 onChange={onChange}
                 onBlur={onBlur}
                 autoComplete="off"
               />
               <FormErrorMessage>
-                {formErrors.firstName.errorMessage}
+                {formErrors.firstname.errorMessage}
               </FormErrorMessage>
             </FormControl>
             <FormControl
               marginBottom="1.5"
-              isInvalid={formErrors.lastName.hasError}
+              isInvalid={formErrors.lastname.hasError}
             >
-              <FormLabel htmlFor="lastName" fontSize="sm">
+              <FormLabel htmlFor="lastname" fontSize="sm">
                 Last Name
               </FormLabel>
               <Input
-                id="lastName"
-                name="lastName"
+                id="lastname"
+                name="lastname"
                 type="text"
                 placeholder="Enter your last name"
-                value={formInputs.lastName}
+                value={formInputs.lastname}
                 onChange={onChange}
                 onBlur={onBlur}
                 autoComplete="off"
               />
               <FormErrorMessage>
-                {formErrors.lastName.errorMessage}
+                {formErrors.lastname.errorMessage}
               </FormErrorMessage>
             </FormControl>
             <FormControl
@@ -198,24 +218,30 @@ const Signup = () => {
             </FormControl>
             <FormControl
               marginBottom="3"
-              isInvalid={formErrors.confirmPassword.hasError}
+              isInvalid={formErrors.password_confirmation.hasError}
             >
-              <FormLabel htmlFor="confirmPassword" fontSize="sm">
+              <FormLabel htmlFor="password_confirmation" fontSize="sm">
                 Confirm Password
               </FormLabel>
               <Input
-                id="confirmPassword"
-                name="confirmPassword"
+                id="password_confirmation"
+                name="password_confirmation"
                 type="password"
                 placeholder="Confirm your password"
-                value={formInputs.confirmPassword}
+                value={formInputs.password_confirmation}
                 onChange={onChange}
                 onBlur={onBlur}
               />
               <FormErrorMessage>
-                {formErrors.confirmPassword.errorMessage}
+                {formErrors.password_confirmation.errorMessage}
               </FormErrorMessage>
             </FormControl>
+            {successMessage && (
+              <Alert status="success" mb={1.5}>
+                <AlertIcon />
+                {successMessage}
+              </Alert>
+            )}
             <Button
               type="submit"
               w="full"
@@ -230,7 +256,7 @@ const Signup = () => {
           <Text textAlign="center" marginBottom="1.5" fontSize="sm">
             Already have an account?
           </Text>
-          <Link to="/">
+          <Link href="/">
             <Button w="full" fontWeight="normal">
               Sign-In
             </Button>

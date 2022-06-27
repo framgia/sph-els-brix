@@ -7,9 +7,9 @@ import {
   Input,
   Button,
   Text,
+  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import {
   validateLogin,
@@ -144,7 +144,7 @@ const Login = () => {
           <Text textAlign="center" marginBottom="1.5" fontSize="sm">
             No account yet?
           </Text>
-          <Link to="signup">
+          <Link href="signup">
             <Button w="full" fontWeight="normal">
               Sign-Up
             </Button>
