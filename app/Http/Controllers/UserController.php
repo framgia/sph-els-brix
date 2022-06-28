@@ -12,7 +12,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function login(Request $request)
     {
         //
     }
@@ -23,9 +23,26 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function signup(Request $request)
     {
-        //
+        $validatedUser = $request->validate([
+            "firstname" => "required",
+            "lastname" => "required",
+            "email" => "required|email|unique:users,email",
+            "password" => "required|confirmed",
+            "password_confirmation" => "required"
+        ]);
+
+        User::create([
+            "firstname" => $validatedUser["firstname"],
+            "lastname" => $validatedUser["lastname"],
+            "email" => $validatedUser["email"],
+            "password" => bcrypt($validatedUser["password"]),
+        ]);
+
+        return response()->json([
+            "signupSuccess" => "Account registered successfully."
+        ], 201);
     }
 
     /**

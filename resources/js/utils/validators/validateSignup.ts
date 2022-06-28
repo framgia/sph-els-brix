@@ -1,6 +1,5 @@
 import {
   isRequired,
-  isValidName,
   isValidEmail,
   isAlphaNumeric,
   isMinimum,
@@ -10,58 +9,42 @@ import {
 export const validateSignup = (
   name: string,
   value: string,
-  formErrors: ELearning.SignupFormErrors,
+  formErrors: ELearning.FrontendError,
   passwordToMatch: string
 ) => {
   switch (name) {
-    case "firstName":
+    case "firstname":
       if (isRequired(value)) {
         formErrors = {
           ...formErrors,
-          firstName: {
+          firstname: {
             hasError: true,
             errorMessage: "First name is required",
-          },
-        };
-      } else if (!isValidName(value)) {
-        formErrors = {
-          ...formErrors,
-          firstName: {
-            hasError: true,
-            errorMessage: "First name must only contain letters",
           },
         };
       } else {
         formErrors = {
           ...formErrors,
-          firstName: {
+          firstname: {
             hasError: false,
             errorMessage: "",
           },
         };
       }
       break;
-    case "lastName":
+    case "lastname":
       if (isRequired(value)) {
         formErrors = {
           ...formErrors,
-          lastName: {
+          lastname: {
             hasError: true,
             errorMessage: "Last name is required",
-          },
-        };
-      } else if (!isValidName(value)) {
-        formErrors = {
-          ...formErrors,
-          lastName: {
-            hasError: true,
-            errorMessage: "Last name must only contain letters",
           },
         };
       } else {
         formErrors = {
           ...formErrors,
-          lastName: {
+          lastname: {
             hasError: false,
             errorMessage: "",
           },
@@ -130,11 +113,11 @@ export const validateSignup = (
         };
       }
       break;
-    case "confirmPassword":
+    case "password_confirmation":
       if (!doesMatch(passwordToMatch, value)) {
         formErrors = {
           ...formErrors,
-          confirmPassword: {
+          password_confirmation: {
             hasError: true,
             errorMessage: "Passwords do not match",
           },
@@ -142,7 +125,7 @@ export const validateSignup = (
       } else {
         formErrors = {
           ...formErrors,
-          confirmPassword: {
+          password_confirmation: {
             hasError: false,
             errorMessage: "",
           },
@@ -151,11 +134,11 @@ export const validateSignup = (
       break;
     default:
       formErrors = {
-        firstName: {
+        firstname: {
           hasError: false,
           errorMessage: "",
         },
-        lastName: {
+        lastname: {
           hasError: false,
           errorMessage: "",
         },
@@ -167,26 +150,11 @@ export const validateSignup = (
           hasError: false,
           errorMessage: "",
         },
-        confirmPassword: {
+        password_confirmation: {
           hasError: false,
           errorMessage: "",
         },
       };
-  }
-
-  return formErrors;
-};
-
-export const validateSignupOnSubmit = (
-  inputs: ELearning.LoginInputs,
-  formErrors: ELearning.SignupFormErrors,
-  passwordToMatch: string
-) => {
-  for (const [key, value] of Object.entries(inputs)) {
-    formErrors = {
-      ...formErrors,
-      ...validateSignup(key, value, formErrors, passwordToMatch),
-    };
   }
 
   return formErrors;

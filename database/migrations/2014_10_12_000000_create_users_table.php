@@ -18,9 +18,11 @@ return new class extends Migration
             $table->string('firstname');
             $table->string("lastname");
             $table->string('email')->unique();
+            $table->string('role')->default('basic');
+            $table->string('avatar_url')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestampsTz();
         });
     }
 

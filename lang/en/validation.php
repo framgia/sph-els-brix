@@ -152,6 +152,21 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'firstname' => [
+            'required' => 'First name is required'
+        ],
+        'lastname' => [
+            'required' => 'Last name is required'
+        ],
+        'email' => [
+            'required' => 'Email is required'
+        ],
+        'password' => [
+            'required' => 'Password is required'
+        ],
+        'password_confirmation' => [
+            'required' => 'Password confirmation is required'
+        ],
     ],
 
     /*

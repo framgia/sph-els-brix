@@ -8,4 +8,4 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get("/search-user", [UserController::class, "search"]);
+Route::post("/signup", [UserController::class, "signup"]);
