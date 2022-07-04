@@ -1,35 +1,24 @@
 {
   "private": true,
   "scripts": {
-    "dev": "npm run development",
-    "development": "mix",
-    "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "hot": "mix watch --hot",
-    "prod": "npm run production",
-    "production": "mix --production"
+    "dev": "vite",
+    "build": "vite build"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.17.12",
-    "@chakra-ui/icons": "^2.0.2",
-    "@chakra-ui/react": "^2.2.1",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@fontsource/nunito": "^4.5.9",
-    "@reduxjs/toolkit": "^1.8.2",
-    "@types/node": "^16.11.39",
-    "@types/react": "^18.0.12",
-    "@types/react-dom": "^18.0.5",
-    "browser-sync": "^2.27.10",
-    "browser-sync-webpack-plugin": "^2.3.0",
-    "framer-motion": "^6.3.11",
-    "laravel-mix": "^6.0.6",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-icons": "^4.4.0",
-    "react-redux": "^8.0.2",
-    "react-router-dom": "^6.3.0",
-    "ts-loader": "^9.3.0",
-    "typescript": "^4.7.3"
+    "@headlessui/react": "^1.4.2",
+    "@inertiajs/inertia": "^0.11.0",
+    "@inertiajs/inertia-react": "^0.8.0",
+    "@inertiajs/progress": "^0.2.6",
+    "@tailwindcss/forms": "^0.5.2",
+    "@vitejs/plugin-react": "^1.3.2",
+    "autoprefixer": "^10.4.2",
+    "axios": "^0.25",
+    "laravel-vite-plugin": "^0.2.1",
+    "lodash": "^4.17.19",
+    "postcss": "^8.4.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "tailwindcss": "^3.1.0",
+    "vite": "^2.9.11"
   }
 }

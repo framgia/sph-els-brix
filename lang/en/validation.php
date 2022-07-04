@@ -43,6 +43,7 @@ return [
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
+    'doesnt_start_with' => 'The :attribute may not start with one of the following: :values.',
     'email' => 'The :attribute must be a valid email address.',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'enum' => 'The selected :attribute is invalid.',
@@ -129,7 +130,6 @@ return [
         'string' => 'The :attribute must be :size characters.',
     ],
     'starts_with' => 'The :attribute must start with one of the following: :values.',
-    'doesnt_start_with' => 'The :attribute may not start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
     'unique' => 'The :attribute has already been taken.',
@@ -149,23 +149,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
         'firstname' => [
-            'required' => 'First name is required'
+            'required' => 'The first name field is required.',
         ],
         'lastname' => [
-            'required' => 'Last name is required'
-        ],
-        'email' => [
-            'required' => 'Email is required'
-        ],
-        'password' => [
-            'required' => 'Password is required'
-        ],
-        'password_confirmation' => [
-            'required' => 'Password confirmation is required'
+            'required' => 'The last name field is required.',
         ],
     ],
 
