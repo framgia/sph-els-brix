@@ -2,7 +2,7 @@ import defaultAvatar from "../Images/default-avatar.png";
 
 const UserOverview = ({ firstname, lastname }) => {
 	return (
-		<div className="flex items-center gap-4 border rounded p-4">
+		<div className="flex items-center m:w-full gap-4 border rounded p-4 w-96">
 			<div>
 				<img
 					src={defaultAvatar}

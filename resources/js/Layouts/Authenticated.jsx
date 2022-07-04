@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "@inertiajs/inertia-react";
+
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/inertia-react";
+import AngleQuotationMark from "@/Components/AngleQuotationMark";
+import ResponsiveMenu from "@/Components/ResponsiveMenu";
 
 export default function Authenticated({ auth, children }) {
 	const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -51,18 +54,7 @@ export default function Authenticated({ auth, children }) {
 											>
 												{`${auth.user.firstname} ${auth.user.lastname}`}
 
-												<svg
-													className="ml-2 -mr-0.5 h-4 w-4"
-													xmlns="http://www.w3.org/2000/svg"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-													<path
-														fillRule="evenodd"
-														d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-														clipRule="evenodd"
-													/>
-												</svg>
+												<AngleQuotationMark />
 											</button>
 										</span>
 									</Dropdown.Trigger>
@@ -89,31 +81,9 @@ export default function Authenticated({ auth, children }) {
 								}
 								className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
 							>
-								<svg
-									className="h-6 w-6"
-									stroke="currentColor"
-									fill="none"
-									viewBox="0 0 24 24"
-								>
-									<path
-										className={
-											!showingNavigationDropdown ? "inline-flex" : "hidden"
-										}
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth="2"
-										d="M4 6h16M4 12h16M4 18h16"
-									/>
-									<path
-										className={
-											showingNavigationDropdown ? "inline-flex" : "hidden"
-										}
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth="2"
-										d="M6 18L18 6M6 6l12 12"
-									/>
-								</svg>
+								<ResponsiveMenu
+									showingNavigationDropdown={showingNavigationDropdown}
+								/>
 							</button>
 						</div>
 					</div>
