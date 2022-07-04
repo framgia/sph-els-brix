@@ -30,8 +30,8 @@ Route::get('/dashboard', function () {
   return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/lessons', function () {
-  return Inertia::render('Lessons', array('categories' => Category::get()));
-})->middleware(['auth', 'verified'])->name('lessons');
+Route::get('/categories', function () {
+  return Inertia::render('Categories', array('categories' => Category::get()));
+})->middleware(['auth', 'verified'])->name('categories');
 
 require __DIR__ . '/auth.php';
