@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,8 +30,8 @@ Route::get('/dashboard', function () {
   return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/lessons', function () {
-  return Inertia::render('Lessons');
-})->middleware(['auth', 'verified'])->name('lessons');
+Route::get('/categories', function () {
+  return Inertia::render('Categories', array('categories' => Category::get()));
+})->middleware(['auth', 'verified'])->name('categories');
 
 require __DIR__ . '/auth.php';
