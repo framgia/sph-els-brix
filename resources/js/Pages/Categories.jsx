@@ -4,7 +4,7 @@ import CategoryCard from "@/Components/CategoryCard";
 import { Head } from "@inertiajs/inertia-react";
 import React, { Fragment } from "react";
 
-const Lessons = (props) => {
+const Categories = (props) => {
 	return (
 		<Authenticated auth={props.auth} errors={props.errors}>
 			<Head title="Categories" />
@@ -16,6 +16,7 @@ const Lessons = (props) => {
 							{props.categories.map((category) => (
 								<Fragment key={category.id}>
 									<CategoryCard
+										id={category.id}
 										title={category.title}
 										description={category.description}
 									/>
@@ -29,4 +30,4 @@ const Lessons = (props) => {
 	);
 };
 
-export default Lessons;
+export default Categories;
