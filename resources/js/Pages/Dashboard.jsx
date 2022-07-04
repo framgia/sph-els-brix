@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
 import { Head } from "@inertiajs/inertia-react";
 
 import Authenticated from "@/Layouts/Authenticated";
 import UserOverview from "@/Components/UserOverview";
 
-export default function Dashboard(props) {
-	useEffect(() => {
-		console.log(props);
-	}, []);
+const Dashboard = (props) => {
 	return (
 		<Authenticated auth={props.auth} errors={props.errors}>
 			<Head title="Dashboard" />
@@ -26,4 +22,6 @@ export default function Dashboard(props) {
 			</div>
 		</Authenticated>
 	);
-}
+};
+
+export default Dashboard;
