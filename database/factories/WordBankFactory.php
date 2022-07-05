@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lesson>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\WordBank>
  */
-class LessonFactory extends Factory
+class WordBankFactory extends Factory
 {
 	/**
 	 * Define the model's default state.
@@ -17,9 +17,8 @@ class LessonFactory extends Factory
 	public function definition()
 	{
 		return [
-			'categoryId' => 1,
-			'wordInJapanese' => 'じゅう',
-			'romanizedWord' => 'Juu'
+			'lessonId' => 10,
+			'word' => 'Ten'
 		];
 	}
 }
