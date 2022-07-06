@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChoiceController;
 use App\Http\Controllers\LessonController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +36,10 @@ Route::get('/categories', function () {
 })->middleware(['auth', 'verified'])->name('categories');
 
 Route::get('/lessons/{id}', function ($id) {
-  return Inertia::render('Lessons', LessonController::getOne($id));
+  return Inertia::render(
+    'Lessons',
+    LessonController::getOne($id)
+  );
 })->middleware(['auth', 'verified'])->name('lessons');
 
 require __DIR__ . '/auth.php';

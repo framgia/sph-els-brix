@@ -20,6 +20,9 @@ const Lessons = (props) => {
 								{props.lessons.map((lesson) => (
 									<Fragment key={lesson.id}>
 										<LessonCard
+											choices={props.choices.filter(
+												(choice) => choice.lessonId === lesson.id
+											)}
 											wordInJapanese={lesson.wordInJapanese}
 											romanizedWord={lesson.romanizedWord}
 										/>
