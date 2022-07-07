@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Choice;
 use App\Models\Lesson;
 
 class LessonController extends Controller
@@ -11,7 +12,8 @@ class LessonController extends Controller
 	{
 		return array(
 			'lessons' => Lesson::where('categoryId', $id)->get(),
-			'category' => Category::where('id', $id)->first()->title
+			'category' => Category::where('id', $id)->first()->title,
+			'choices' => Choice::all()
 		);
 	}
 }
