@@ -11,7 +11,7 @@ const LessonCard = ({ choices, wordInJapanese, romanizedWord }) => {
 			<div className="flex flex-col">
 				{choices.map((choice) => (
 					<div className="flex items-center gap-4 mb-2" key={choice.id}>
-						<input type="radio" name={choice.word} value={choice.word} />
+						<input type="radio" name={romanizedWord} value={choice.word} />
 						<label>{choice.word}</label>
 					</div>
 				))}
