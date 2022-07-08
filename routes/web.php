@@ -42,4 +42,8 @@ Route::get('/lessons/{id}', function ($id) {
   );
 })->middleware(['auth', 'verified'])->name('lessons');
 
+Route::get('results', function () {
+  return Inertia::render('Results');
+})->middleware(['auth', 'verified'])->name('results');
+
 require __DIR__ . '/auth.php';
