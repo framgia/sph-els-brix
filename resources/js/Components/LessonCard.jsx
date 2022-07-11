@@ -1,11 +1,26 @@
 import React from "react";
 
 const LessonCard = ({
-	onChangeHandler,
 	choices,
 	wordInJapanese,
 	romanizedWord,
+	initialValues,
+	setInitialValues,
+	categoryId,
+	lessonId,
 }) => {
+	const onChangeHandler = (event) => {
+		setInitialValues((previousValues) => [
+			...previousValues,
+			{
+				categoryId,
+				lessonId,
+				wordInJapanese,
+				answer: event.target.value,
+			},
+		]);
+	};
+
 	return (
 		<div className="mt-4 p-4 border rounded grid grid-cols-3 gap-4 place-items-center">
 			<div className="col-span-2 flex flex-col items-center">
@@ -19,7 +34,7 @@ const LessonCard = ({
 						<input
 							id={choice.id}
 							type="radio"
-							name={romanizedWord}
+							name={choice.lessonId}
 							value={choice.word}
 							onChange={onChangeHandler}
 							required

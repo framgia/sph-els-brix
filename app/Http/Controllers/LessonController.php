@@ -12,7 +12,7 @@ class LessonController extends Controller
 	{
 		return array(
 			'lessons' => Lesson::where('categoryId', $id)->get(),
-			'category' => Category::where('id', $id)->first()->title,
+			'category' => Category::where('id', $id)->first(),
 			'choices' => Choice::all()
 		);
 	}

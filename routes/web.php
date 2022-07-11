@@ -3,9 +3,11 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChoiceController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\ResultController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,23 +29,18 @@ Route::get('/', function () {
   ]);
 });
 
-Route::get('/dashboard', function () {
-  return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+  Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
 
-Route::get('/categories', function () {
-  return Inertia::render('Categories', array('categories' => CategoryController::get()));
-})->middleware(['auth', 'verified'])->name('categories');
+  Route::group(['prefix' => 'categories'], function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/{id}', [CategoryController::class, 'show'])->name('lessons');
+  });
 
-Route::get('/lessons/{id}', function ($id) {
-  return Inertia::render(
-    'Lessons',
-    LessonController::getOne($id)
-  );
-})->middleware(['auth', 'verified'])->name('lessons');
-
-Route::get('results', function () {
-  return Inertia::render('Results');
-})->middleware(['auth', 'verified'])->name('results');
+  Route::group(['prefix' => 'results'], function () {
+    Route::get('/{id}', [ResultController::class, 'show'])->name('results.get');
+    Route::post('/', [ResultController::class, 'store'])->name('results.store');
+  });
+});
 
 require __DIR__ . '/auth.php';

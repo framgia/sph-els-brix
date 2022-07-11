@@ -1,77 +1,104 @@
-import { Fragment, useEffect } from "react";
-import { Inertia } from "@inertiajs/inertia";
-import { Head, Link, useForm } from "@inertiajs/inertia-react";
-
 import Authenticated from "@/Layouts/Authenticated";
-import LessonCard from "@/Components/LessonCard";
 import Button from "@/Components/Button";
+import { Head } from "@inertiajs/inertia-react";
+import { Fragment, useState } from "react";
+import { Inertia } from "@inertiajs/inertia";
 
-const Lessons = ({ auth, category, choices, errors, lessons }) => {
-	const initialValues = {};
+const Lessons = ({ auth, category, errors, ziggy }) => {
+  const [isProcessing, setIsProcessing] = useState(false);
 
-	const {
-		data,
-		setData,
-		post,
-		processing,
-		errors: formErrors,
-	} = useForm(initialValues);
+  const onViewResults = (categoryId) => {
+    Inertia.visit(`/results/${categoryId}`);
+  };
 
-	useEffect(() => {
-		lessons.forEach((lesson) => (initialValues[lesson.romanizedWord] = ""));
-	}, []);
+  const onSubmitAnswer = (
+    categoryId,
+    lessonId,
+    choiceId,
+    wordInJapanese,
+    answer
+  ) => {
+    Inertia.post(
+      "/results",
+      {
+        categoryId,
+        lessonId,
+        choiceId,
+        wordInJapanese,
+        answer,
+      },
+      {
+        preserveState: true,
+        onStart: setIsProcessing(true),
+        onFinish: setIsProcessing(false),
+      }
+    );
 
-	const onChangeHandler = (event) => {
-		setData(event.target.name, event.target.value);
-	};
+    Inertia.reload();
+  };
 
-	const onSubmitHandler = (event) => {
-		event.preventDefault();
+  return (
+    <Authenticated auth={auth} errors={errors}>
+      <Head title="Lessons" />
 
-		console.log(data);
-
-		if (!processing) return Inertia.visit(route("results"));
-	};
-
-	return (
-		<Authenticated auth={auth} errors={errors}>
-			<Head title="Lessons" />
-
-			<div className="py-6">
-				<div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-					<div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-						<div className="p-6 bg-white border-b border-gray-200 flex flex-col">
-							<h1 className="font-bold">{category}</h1>
-
-							<form
-								className="grid grid-cols-2 gap-4"
-								onSubmit={onSubmitHandler}
-							>
-								{lessons.map((lesson) => (
-									<Fragment key={lesson.id}>
-										<LessonCard
-											choices={choices.filter(
-												(choice) => choice.lessonId === lesson.id
-											)}
-											wordInJapanese={lesson.wordInJapanese}
-											romanizedWord={lesson.romanizedWord}
-											onChangeHandler={onChangeHandler}
-										/>
-									</Fragment>
-								))}
-								<div></div>
-								<div className="mt-8 justify-self-end">
-									{/* <Link href={route("results")}> */}
-									<Button processing={processing}>Submit Answers</Button>
-									{/* </Link> */}
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</Authenticated>
-	);
+      <div className="py-6">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div className="p-6 bg-white border-b border-gray-200">
+              <div className="border rounded p-4 mb-4">
+                <h1 className="font-bold mb-4">{category.title}</h1>
+                <p>{category.description}</p>
+              </div>
+              <div className="border rounded p-4 grid grid-cols-2 gap-4">
+                {category.lessons.map(
+                  ({ id, wordInJapanese, romanizedWord, choices, result }) => (
+                    <div
+                      key={id}
+                      className="border rounded p-4 flex flex-col items-center justify-center gap-4"
+                    >
+                      <h1 className="font-bold text-4xl">{wordInJapanese}</h1>
+                      <p>{romanizedWord}</p>
+                      {result === null ? (
+                        <div className="flex gap-4">
+                          {choices.map((choice) => (
+                            <Fragment key={choice.id}>
+                              <Button
+                                processing={isProcessing}
+                                onClick={() =>
+                                  onSubmitAnswer(
+                                    category.id,
+                                    id,
+                                    choice.id,
+                                    wordInJapanese,
+                                    choice.word
+                                  )
+                                }
+                              >
+                                {choice.word}
+                              </Button>
+                            </Fragment>
+                          ))}
+                        </div>
+                      ) : (
+                        <div>
+                          <span>Answer submitted</span>
+                        </div>
+                      )}
+                    </div>
+                  )
+                )}
+                <div>
+                  <Button onClick={() => onViewResults(category.id)}>
+                    View results
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Authenticated>
+  );
 };
 
 export default Lessons;
