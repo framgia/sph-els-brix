@@ -5,12 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WordBank extends Model
+class Checkpoint extends Model
 {
 	use HasFactory;
 
 	protected $fillable = [
-		'lessonId',
-		'word'
+		'user_id',
+		'category_id',
+		'prerequisite',
+		'can_start',
+		'is_finished',
+		'questions_answered',
+		'total_questions'
 	];
 }
