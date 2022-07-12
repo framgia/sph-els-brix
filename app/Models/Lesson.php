@@ -14,4 +14,14 @@ class Lesson extends Model
 		'wordInJapanese',
 		'romanizedWord',
 	];
+
+	public function choices()
+	{
+		return $this->hasMany(Choice::class, 'lessonId');
+	}
+
+	public function result()
+	{
+		return $this->hasOne(Result::class, 'lessonId');
+	}
 }
