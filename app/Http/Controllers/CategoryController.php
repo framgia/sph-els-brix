@@ -19,7 +19,7 @@ class CategoryController extends Controller
 	public function show($id)
 	{
 		return Inertia::render('Questions', [
-			'category' => Category::query()->find($id)->with(['questions' => function ($q) {
+			'category' => Category::query()->where('id', $id)->with(['questions' => function ($q) {
 				$q->with(['choices', 'result' => fn ($r) => $r->where('user_id', auth()->user()->id)->get()]);
 			}])->first()
 		]);

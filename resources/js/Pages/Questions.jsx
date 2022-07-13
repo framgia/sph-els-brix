@@ -1,13 +1,30 @@
 import Authenticated from "@/Layouts/Authenticated";
 import Button from "@/Components/Button";
-import { Head } from "@inertiajs/inertia-react";
+import { Head, Link } from "@inertiajs/inertia-react";
 import { Fragment, useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
+import { Stepper, Step, StepButton, Typography, Box } from "@mui/material";
 
-const Questions = ({ auth, category, errors, ziggy }) => {
+const Questions = ({ auth, category, errors }) => {
   const [isProcessing, setIsProcessing] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+  const [completed, setCompleted] = useState({});
+  const steps = category.questions.map((question) => question);
 
-  const onViewResults = (categoryId) => Inertia.visit(`/results/${categoryId}`);
+  const totalSteps = () => steps.length;
+  const completedSteps = () => Object.keys(completed).length;
+  const isLastStep = () => activeStep === totalSteps() - 1;
+  const allStepsCompleted = () => completedSteps() === totalSteps();
+  const handleNext = () =>
+    setActiveStep(
+      isLastStep() && !allStepsCompleted()
+        ? steps.findIndex((step, i) => !(i in completed))
+        : activeStep + 1
+    );
+  const handleReset = () => {
+    setActiveStep(0);
+    setCompleted({});
+  };
 
   const onSubmitAnswer = (
     categoryId,
@@ -26,13 +43,14 @@ const Questions = ({ auth, category, errors, ziggy }) => {
         choice,
       },
       {
-        preserveState: true,
         onStart: setIsProcessing(true),
         onFinish: setIsProcessing(false),
       }
     );
 
-    Inertia.reload();
+    Inertia.reload({
+      preserveState: true,
+    });
   };
 
   return (
@@ -47,27 +65,43 @@ const Questions = ({ auth, category, errors, ziggy }) => {
                 <h1 className="font-bold mb-4">{category.title}</h1>
                 <p>{category.description}</p>
               </div>
-              <div className="border rounded p-4 grid grid-cols-2 gap-4">
-                {category.questions.map(
-                  ({ id, hiragana, romaji, choices, result }) => (
-                    <div
-                      key={id}
-                      className="border rounded p-4 flex flex-col items-center justify-center gap-4"
-                    >
-                      <h1 className="font-bold text-4xl">{hiragana}</h1>
-                      <p>{romaji}</p>
-                      {result === null ? (
+              <div className="border rounded p-4 flex flex-col gap-4">
+                <Stepper activeStep={activeStep}>
+                  {steps.map((question, index) => (
+                    <Step key={question.id} completed={completed[index]}>
+                      <StepButton color="inherit" />
+                    </Step>
+                  ))}
+                </Stepper>
+                {activeStep === steps.length ? (
+                  <Fragment>
+                    <Typography sx={{ mt: 2, mb: 1 }}>
+                      All steps completed - you&apos;re finished
+                    </Typography>
+                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                      <Box sx={{ flex: "1 1 auto" }} />
+                      <Button onClick={handleReset}>Reset</Button>
+                    </Box>
+                  </Fragment>
+                ) : (
+                  <Fragment>
+                    <div className="flex items-end justify-center gap-4">
+                      <h1 className="font-bold text-4xl mt-4">
+                        {steps[activeStep].hiragana}
+                      </h1>
+                      <h2 className="text-2xl">{steps[activeStep].romaji}</h2>
+                      {steps[activeStep].result === null ? (
                         <div className="flex gap-4">
-                          {choices.map((choice) => (
+                          {steps[activeStep].choices.map((choice) => (
                             <Fragment key={choice.id}>
                               <Button
                                 processing={isProcessing}
                                 onClick={() =>
                                   onSubmitAnswer(
                                     category.id,
-                                    id,
+                                    steps[activeStep].id,
                                     choice.id,
-                                    hiragana,
+                                    steps[activeStep].hiragana,
                                     choice.word
                                   )
                                 }
@@ -83,13 +117,23 @@ const Questions = ({ auth, category, errors, ziggy }) => {
                         </div>
                       )}
                     </div>
-                  )
+                    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                      <Box sx={{ flex: "1 1 auto" }} />
+                      {activeStep !== steps.length - 1 ? (
+                        <Button
+                          onClick={handleNext}
+                          processing={steps[activeStep].result === null}
+                        >
+                          Next
+                        </Button>
+                      ) : (
+                        <Link href={route("results.get", category.id)}>
+                          <Button>Finish</Button>
+                        </Link>
+                      )}
+                    </Box>
+                  </Fragment>
                 )}
-                <div>
-                  <Button onClick={() => onViewResults(category.id)}>
-                    View results
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
