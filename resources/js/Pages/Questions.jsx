@@ -119,7 +119,8 @@ const Questions = ({ auth, category, errors }) => {
                     </div>
                     <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                       <Box sx={{ flex: "1 1 auto" }} />
-                      {activeStep !== steps.length - 1 ? (
+                      {steps[activeStep].result === null &&
+                      activeStep !== steps.length - 1 ? (
                         <Button
                           onClick={handleNext}
                           processing={steps[activeStep].result === null}
