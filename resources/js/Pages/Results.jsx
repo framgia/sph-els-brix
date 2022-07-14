@@ -4,7 +4,7 @@ import Authenticated from "@/Layouts/Authenticated";
 import { useEffect } from "react";
 
 const Results = ({ auth, category, errors, results, ziggy }) => {
-  const correctAnswers = results.filter((result) => result.isCorrect);
+  const correctAnswers = results.filter((result) => result.is_correct);
 
   return (
     <Authenticated auth={auth} errors={errors}>
@@ -23,9 +23,9 @@ const Results = ({ auth, category, errors, results, ziggy }) => {
                     <span className="text-xs">
                       {index + 1} - {results.length}
                     </span>
-                    <h1 className="font-bold">{result.wordInJapanese}</h1>
-                    <p>{result.answer}</p>
-                    <p>{result.isCorrect ? "Correct" : "Wrong"}</p>
+                    <h1 className="font-bold">{result.hiragana}</h1>
+                    <p>{result.choice}</p>
+                    <p>{result.is_correct ? "Correct" : "Wrong"}</p>
                   </div>
                 ))}
               </div>

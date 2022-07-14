@@ -34,7 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
   Route::group(['prefix' => 'categories'], function () {
     Route::get('/', [CategoryController::class, 'index'])->name('categories');
-    Route::get('/{id}', [CategoryController::class, 'show'])->name('lessons');
+    Route::get('/{id}', [CategoryController::class, 'show'])->name('questions');
   });
 
   Route::group(['prefix' => 'results'], function () {

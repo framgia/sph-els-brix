@@ -4,28 +4,26 @@ import { Head } from "@inertiajs/inertia-react";
 import { Fragment, useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 
-const Lessons = ({ auth, category, errors, ziggy }) => {
+const Questions = ({ auth, category, errors, ziggy }) => {
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const onViewResults = (categoryId) => {
-    Inertia.visit(`/results/${categoryId}`);
-  };
+  const onViewResults = (categoryId) => Inertia.visit(`/results/${categoryId}`);
 
   const onSubmitAnswer = (
     categoryId,
-    lessonId,
+    questionId,
     choiceId,
-    wordInJapanese,
-    answer
+    hiragana,
+    choice
   ) => {
     Inertia.post(
       "/results",
       {
         categoryId,
-        lessonId,
+        questionId,
         choiceId,
-        wordInJapanese,
-        answer,
+        hiragana,
+        choice,
       },
       {
         preserveState: true,
@@ -39,7 +37,7 @@ const Lessons = ({ auth, category, errors, ziggy }) => {
 
   return (
     <Authenticated auth={auth} errors={errors}>
-      <Head title="Lessons" />
+      <Head title="Questions" />
 
       <div className="py-6">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -50,14 +48,14 @@ const Lessons = ({ auth, category, errors, ziggy }) => {
                 <p>{category.description}</p>
               </div>
               <div className="border rounded p-4 grid grid-cols-2 gap-4">
-                {category.lessons.map(
-                  ({ id, wordInJapanese, romanizedWord, choices, result }) => (
+                {category.questions.map(
+                  ({ id, hiragana, romaji, choices, result }) => (
                     <div
                       key={id}
                       className="border rounded p-4 flex flex-col items-center justify-center gap-4"
                     >
-                      <h1 className="font-bold text-4xl">{wordInJapanese}</h1>
-                      <p>{romanizedWord}</p>
+                      <h1 className="font-bold text-4xl">{hiragana}</h1>
+                      <p>{romaji}</p>
                       {result === null ? (
                         <div className="flex gap-4">
                           {choices.map((choice) => (
@@ -69,7 +67,7 @@ const Lessons = ({ auth, category, errors, ziggy }) => {
                                     category.id,
                                     id,
                                     choice.id,
-                                    wordInJapanese,
+                                    hiragana,
                                     choice.word
                                   )
                                 }
@@ -101,4 +99,4 @@ const Lessons = ({ auth, category, errors, ziggy }) => {
   );
 };
 
-export default Lessons;
+export default Questions;
