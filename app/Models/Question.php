@@ -5,23 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lesson extends Model
+class Question extends Model
 {
 	use HasFactory;
 
 	protected $fillable = [
-		'categoryId',
-		'wordInJapanese',
-		'romanizedWord',
+		'category_id',
+		'hiragana',
+		'romaji',
 	];
 
 	public function choices()
 	{
-		return $this->hasMany(Choice::class, 'lessonId');
+		return $this->hasMany(Choice::class);
 	}
 
 	public function result()
 	{
-		return $this->hasOne(Result::class, 'lessonId');
+		return $this->hasOne(Result::class);
 	}
 }

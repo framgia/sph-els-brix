@@ -14,8 +14,13 @@ class Category extends Model
     'description'
   ];
 
-  public function lessons()
+  public function questions()
   {
-    return $this->hasMany(Lesson::class, 'categoryId');
+    return $this->hasMany(Question::class);
+  }
+
+  public function checkpoint()
+  {
+    return $this->hasOne(Checkpoint::class);
   }
 }

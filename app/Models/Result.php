@@ -11,11 +11,11 @@ class Result extends Model
 
 	protected $fillable = [
 		'user_id',
-		'categoryId',
-		'lessonId',
+		'category_id',
+		'question_id',
 		'choice_id',
-		'wordInJapanese',
-		'answer',
-		'isCorrect'
+		'hiragana',
+		'choice',
+		'is_correct'
 	];
 }
