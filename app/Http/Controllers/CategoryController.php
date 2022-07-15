@@ -9,19 +9,19 @@ use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
-	public function index()
-	{
-		return Inertia::render('Categories', [
-			'categories' => Category::query()->with('checkpoint')->get()
-		]);
-	}
+  public function index(): \Inertia\Response
+  {
+    return Inertia::render('Categories', [
+      'categories' => Category::query()->with('checkpoint')->get()
+    ]);
+  }
 
-	public function show($id)
-	{
-		return Inertia::render('Questions', [
-			'category' => Category::query()->where('id', $id)->with(['questions' => function ($q) {
-				$q->with(['choices', 'result' => fn ($r) => $r->where('user_id', auth()->user()->id)->get()]);
-			}])->first()
-		]);
-	}
+  public function show($id): \Inertia\Response
+  {
+    return Inertia::render('Questions', [
+      'category' => Category::query()->where('id', $id)->with(['questions' => function ($q) {
+        $q->with(['choices', 'result' => fn($r) => $r->where('user_id', auth()->user()->id)->get()]);
+      }])->first()
+    ]);
+  }
 }

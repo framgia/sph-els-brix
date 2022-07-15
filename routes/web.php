@@ -30,11 +30,15 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-  Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
+  Route::get('/dashboard', fn () => Inertia::render('Dashboard'))
+    ->name('dashboard');
 
-  Route::group(['prefix' => 'categories'], function () {
-    Route::get('/', [CategoryController::class, 'index'])->name('categories');
-    Route::get('/{id}', [CategoryController::class, 'show'])->name('questions');
+  Route::group([
+    'prefix' => 'categories',
+    'controller' => CategoryController::class
+  ], function () {
+    Route::get('/', 'index')->name('categories');
+    Route::get('/{id}', 'show')->name('questions');
   });
 
   Route::group(['prefix' => 'results'], function () {
